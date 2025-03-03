@@ -72,6 +72,32 @@
     border-color: #9b1c1c; /* Dark red for highlighting */
     box-shadow: 0 0 15px rgba(155, 28, 28, 0.8);
   }
+
+  .deck {
+    width: 160px;
+    height: 220px;
+    margin: 30px auto;
+    border: 3px solid #9b1c1c;
+    border-radius: 15px;
+    padding: 50px 0;
+    background-color: #7a4d4a;
+    font-size: 22px;
+    font-weight: bold;
+    color: #fff;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .deck:hover {
+    transform: scale(1.08);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+  }
+
+  .deck p {
+    font-size: 26px;
+    font-weight: bold;
+    color: #f0ad4e;
+  }
     </style>
   </head>
   <body>
@@ -110,6 +136,7 @@
     function randomizeDeck(deck) {
       return deck.sort(() => Math.random() - 0.5);
     }
+  
 
     return (
       <div className="App">
