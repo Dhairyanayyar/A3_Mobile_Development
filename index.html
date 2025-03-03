@@ -44,5 +44,19 @@
   </head>
   <body>
     <div id="root"></div>
+
+    <script type="text/babel">
+        function Card({ suit, value, onClick, highlighted }) {
+          return (
+            <div
+              className={`card ${highlighted ? "highlighted" : ""}`}
+              onClick={onClick}
+            >
+              <span>{value}</span>
+              <span>{suit}</span>
+            </div>
+          );
+        }
+      </script>
   </body>
 </html>
