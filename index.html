@@ -170,6 +170,11 @@
     setDeck(newDeck);
     setDealtCards(cardsToDeal);
   };
+
+  const resetDeck = () => {
+    setDeck(deckBuilder());
+    setDealtCards([]); // Clear the dealt cards
+  };
       </script>
   </body>
 </html>
