@@ -187,6 +187,14 @@
   const swapCardsList = () => {
     setDealtCards(randomizeDeck([...dealtCards]));
   };
+
+  const insertRandomCard = () => {
+    const newCard = {
+      suit: suits[Math.floor(Math.random() * suits.length)],
+      value: values[Math.floor(Math.random() * values.length)]
+    };
+    setDealtCards([...dealtCards, newCard]); // Add a new card to the dealt cards
+  };
       </script>
   </body>
 </html>
