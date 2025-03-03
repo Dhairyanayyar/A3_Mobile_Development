@@ -175,6 +175,18 @@
     setDeck(deckBuilder());
     setDealtCards([]); // Clear the dealt cards
   };
+
+  const throwAwayCard = () => {
+    if (pickedCard !== null) {
+      const newDealtCards = dealtCards.filter((_, index) => index !== pickedCard);
+      setDealtCards(newDealtCards); // Remove the card from dealt cards
+      setPickedCard(null); // Clear selected card after discard
+    }
+  };
+
+  const swapCardsList = () => {
+    setDealtCards(randomizeDeck([...dealtCards]));
+  };
       </script>
   </body>
 </html>
