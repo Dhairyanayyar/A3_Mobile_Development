@@ -11,6 +11,7 @@
     
     <!-- Global and Component Styles -->
     <style>
+      /* Basic reset and styling for all elements */
       * {
         margin: 0;
         padding: 0;
@@ -18,183 +19,284 @@
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       }
 
+      /* Body styling: Center the content and apply background color */
       body {
-        background-color: #2c1b1f;
+        background-color: #2c1b1f; /* Deep Maroon */
         display: flex;
         justify-content: center;
         align-items: center;
         min-height: 100vh;
         overflow: hidden;
-
-
+      }
+      
+      /* Main container for the application */
+      .App {
+        text-align: center;
+        background-color: #3a2620; /* Lighter shade of maroon */
+        border-radius: 16px;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        width: 90%;
+        max-width: 750px;
+        padding: 50px;
+        transition: transform 0.3s ease;
+        color: white;
+      }
+      
+      /* Card styling: Displays each card in a specific size with spacing */
+      .card {
+        display: inline-block;
+        width: 100px;
+        height: 140px;
+        border-radius: 12px;
+        margin: 15px;
+        padding: 20px;
+        background-color: #fff;
+        text-align: center;
+        font-size: 24px;
+        font-weight: bold;
+        color: #2c1b1f; /* Deep Maroon text color */
+        border: 2px solid #ddd;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        cursor: pointer;
+      }
+      
+      /* Card hover effect: Raises the card and adds shadow for a dynamic feel */
+      .card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      }
+      
+      /* Highlight effect when a card is selected by the user */
+      .card.highlighted {
+        border-color: #9b1c1c; /* Dark red for highlighting */
+        box-shadow: 0 0 15px rgba(155, 28, 28, 0.8);
+      }
+      
+      /* Styling for the deck container */
+      .deck {
+        width: 160px;
+        height: 220px;
+        margin: 30px auto;
+        border: 3px solid #9b1c1c;
+        border-radius: 15px;
+        padding: 50px 0;
+        background-color: #7a4d4a; /* Muted maroon */
+        font-size: 22px;
+        font-weight: bold;
+        color: #fff;
+        cursor: pointer;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+      
+      /* Deck hover effect: Increases scale and adds shadow */
+      .deck:hover {
+        transform: scale(1.08);
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+      }
+      
+      /* Deck text styling */
+      .deck p {
+        font-size: 26px;
+        font-weight: bold;
+        color: #f0ad4e; /* Warm yellow for the text */
       }
 
-      .App {
-    text-align: center;
-    background-color: #3a2620; /* Lighter shade of maroon */
-    border-radius: 16px;
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
-    width: 90%;
-    max-width: 750px;
-    padding: 50px;
-    transition: transform 0.3s ease;
-    color: white;
-  }
+      /* Container for the action buttons */
+      .buttons {
+        margin-top: 45px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
 
-  .card {
-    display: inline-block;
-    width: 100px;
-    height: 140px;
-    border-radius: 12px;
-    margin: 15px;
-    padding: 20px;
-    background-color: #fff;
-    text-align: center;
-    font-size: 24px;
-    font-weight: bold;
-    color: #2c1b1f; /* Deep Maroon text color */
-    border: 2px solid #ddd;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    cursor: pointer;
-  }
+      /* Style for individual action buttons */
+      .buttons button {
+        background-color: #d9534f; /* Professional maroon-red */
+        color: white;
+        border: none;
+        padding: 16px 30px;
+        font-size: 18px;
+        margin: 10px;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+      }
+      
+      /* Button hover effect: Changes background color and adds a shadow */
+      .buttons button:hover {
+        background-color: #c9302c;
+        transform: translateY(-4px);
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+      }
 
-  .card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-  }
+      /* Button active effect: Gives a pressed look */
+      .buttons button:active {
+        transform: translateY(2px);
+      }
 
-  .card.highlighted {
-    border-color: #9b1c1c; /* Dark red for highlighting */
-    box-shadow: 0 0 15px rgba(155, 28, 28, 0.8);
-  }
+      /* Container for the dealt cards */
+      .dealt-cards {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-top: 40px;
+        transition: transform 0.3s ease;
+      }
 
-  .card.highlighted {
-    border-color: #9b1c1c; /* Dark red for highlighting */
-    box-shadow: 0 0 15px rgba(155, 28, 28, 0.8);
-  }
+      /* Keyframe animation for card flip */
+      @keyframes flipCard {
+        0% { transform: rotateY(0); }
+        50% { transform: rotateY(180deg); }
+        100% { transform: rotateY(360deg); }
+      }
 
-  .deck {
-    width: 160px;
-    height: 220px;
-    margin: 30px auto;
-    border: 3px solid #9b1c1c;
-    border-radius: 15px;
-    padding: 50px 0;
-    background-color: #7a4d4a;
-    font-size: 22px;
-    font-weight: bold;
-    color: #fff;
-    cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-
-  .deck:hover {
-    transform: scale(1.08);
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
-  }
-
-  .deck p {
-    font-size: 26px;
-    font-weight: bold;
-    color: #f0ad4e;
-  }
+      /* Card flip animation when dealing cards */
+      .card.deal-animation {
+        animation: flipCard 0.5s ease;
+      }
     </style>
   </head>
   <body>
+    <!-- The root element for the React app -->
     <div id="root"></div>
-
+    
+    <!-- React Code with JSX syntax compiled by Babel -->
     <script type="text/babel">
-        function Card({ suit, value, onClick, highlighted }) {
-          return (
-            <div
-              className={`card ${highlighted ? "highlighted" : ""}`}
-              onClick={onClick}
-            >
-              <span>{value}</span>
-              <span>{suit}</span>
-            </div>
-          );
-        }
-        function App() {
-    const suits = ["♥", "♦", "♣", "♠"];
-    const values = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
-
-    const [deck, setDeck] = React.useState(deckBuilder());
-    const [pickedCard, setPickedCard] = React.useState(null);
-    const [dealtCards, setDealtCards] = React.useState([]);
-
-    function deckBuilder() {
-      const newDeck = [];
-      for (let suit of suits) {
-        for (let value of values) {
-          newDeck.push({ suit, value });
-        }
+      // Card Component: Represents an individual card
+      function Card({ suit, value, onClick, highlighted }) {
+        return (
+          <div
+            className={`card ${highlighted ? "highlighted" : ""}`}
+            onClick={onClick}
+          >
+            <span>{value}</span>
+            <span>{suit}</span>
+          </div>
+        );
       }
-      return randomizeDeck(newDeck);
-    }
 
-    function randomizeDeck(deck) {
-      return deck.sort(() => Math.random() - 0.5);
-    }
-  
-    return (
-      <div className="App">
-        <div className="deck" onClick={dealt5Cards}>
-          {deck.length === 0 ? <p>No cards remaining</p> : <p>Deck of Cards</p>}
-        </div>
-      </div>
-    );
-  }
+      // Main App Component
+      function App() {
+        const suits = ["♥", "♦", "♣", "♠"];
+        const values = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
+      
+        const [deck, setDeck] = React.useState(deckBuilder());
+        const [pickedCard, setPickedCard] = React.useState(null);
+        const [dealtCards, setDealtCards] = React.useState([]);
+        
+        // Function to build a shuffled deck of cards
+        function deckBuilder() {
+          const newDeck = [];
+          for (let suit of suits) {
+            for (let value of values) {
+              newDeck.push({ suit, value });
+            }
+          }
+          return randomizeDeck(newDeck);
+        }
+      
+        // Function to shuffle the deck
+        function randomizeDeck(deck) {
+          return deck.sort(() => Math.random() - 0.5);
+        }
 
-  const toggleCardHighlight = (index) => {
-    if (pickedCard === null) {
-      setPickedCard(index);
-    } else if (pickedCard === index) {
-      setPickedCard(null); // Deselect the card if clicked again
-    } else {
-      swapCards(pickedCard, index); // Swap the two selected cards
-      setPickedCard(null); // Clear selected cards after swap
-    }
-  };
+        // Function to toggle the card highlight (for selection)
+        const toggleCardHighlight = (index) => {
+          if (pickedCard === null) {
+            setPickedCard(index);
+          } else if (pickedCard === index) {
+            setPickedCard(null); // Deselect the card if clicked again
+          } else {
+            swapCards(pickedCard, index); // Swap the two selected cards
+            setPickedCard(null); // Clear selected cards after swap
+          }
+        };
 
-  const dealt5Cards = () => {
-    const newDeck = [...deck];
-    const cardsToDeal = newDeck.splice(0, 5);
-    setDeck(newDeck);
-    setDealtCards(cardsToDeal); // Set the dealt cards state
-  };
+        // Function to swap two cards in the dealt cards array
+        const swapCards = (index1, index2) => {
+          const newDealtCards = [...dealtCards];
+          const temp = newDealtCards[index1];
+          newDealtCards[index1] = newDealtCards[index2];
+          newDealtCards[index2] = temp;
+          setDealtCards(newDealtCards); // Update the state with swapped cards
+        };
 
-  const dealt7Cards = () => {
-    const newDeck = [...deck];
-    const cardsToDeal = newDeck.splice(0, 7);
-    setDeck(newDeck);
-    setDealtCards(cardsToDeal);
-  };
+        // Function to deal 5 cards from the deck
+        const dealt5Cards = () => {
+          const newDeck = [...deck];
+          const cardsToDeal = newDeck.splice(0, 5);
+          setDeck(newDeck);
+          setDealtCards(cardsToDeal); // Set the dealt cards state
+        };
 
-  const resetDeck = () => {
-    setDeck(deckBuilder());
-    setDealtCards([]); // Clear the dealt cards
-  };
+        // Function to deal 7 cards from the deck
+        const dealt7Cards = () => {
+          const newDeck = [...deck];
+          const cardsToDeal = newDeck.splice(0, 7);
+          setDeck(newDeck);
+          setDealtCards(cardsToDeal);
+        };
 
-  const throwAwayCard = () => {
-    if (pickedCard !== null) {
-      const newDealtCards = dealtCards.filter((_, index) => index !== pickedCard);
-      setDealtCards(newDealtCards); // Remove the card from dealt cards
-      setPickedCard(null); // Clear selected card after discard
-    }
-  };
+        // Function to reset the deck and remove dealt cards
+        const resetDeck = () => {
+          setDeck(deckBuilder());
+          setDealtCards([]); // Clear the dealt cards
+        };
 
-  const swapCardsList = () => {
-    setDealtCards(randomizeDeck([...dealtCards]));
-  };
+        // Function to discard the selected card
+        const throwAwayCard = () => {
+          if (pickedCard !== null) {
+            const newDealtCards = dealtCards.filter((_, index) => index !== pickedCard);
+            setDealtCards(newDealtCards); // Remove the card from dealt cards
+            setPickedCard(null); // Clear selected card after discard
+          }
+        };
 
-  const insertRandomCard = () => {
-    const newCard = {
-      suit: suits[Math.floor(Math.random() * suits.length)],
-      value: values[Math.floor(Math.random() * values.length)]
-    };
-    setDealtCards([...dealtCards, newCard]); // Add a new card to the dealt cards
-  };
-      </script>
+        // Function to shuffle the dealt cards
+        const swapCardsList = () => {
+          setDealtCards(randomizeDeck([...dealtCards]));
+        };
+
+        // Function to insert a random wildcard into the dealt cards
+        const insertRandomCard = () => {
+          const newCard = {
+            suit: suits[Math.floor(Math.random() * suits.length)],
+            value: values[Math.floor(Math.random() * values.length)]
+          };
+          setDealtCards([...dealtCards, newCard]); // Add a new card to the dealt cards
+        };
+
+        return (
+          <div className="App">
+            <div className="deck" onClick={dealt5Cards}>
+              {deck.length === 0 ? <p>No cards remaining</p> : <p>Deck of Cards</p>}
+            </div>
+            <div className="buttons">
+              <button onClick={dealt5Cards}>Deal 5</button>
+              <button onClick={dealt7Cards}>Deal 7</button> {/* Added button to deal 7 cards */}
+              <button onClick={resetDeck}>Reset</button>
+              <button onClick={throwAwayCard}>Toss</button>
+              <button onClick={swapCardsList}>Regroup</button>
+              <button onClick={insertRandomCard}>Wildcard</button>
+            </div>
+            <div className="dealt-cards">
+              {dealtCards.map((card, index) => (
+                <Card
+                  key={index}
+                  suit={card.suit}
+                  value={card.value}
+                  highlighted={pickedCard === index} // Highlight the selected card
+                  onClick={() => toggleCardHighlight(index)} // Handle card selection
+                />
+              ))}
+            </div>
+          </div>
+        );
+      }
+
+      // Render the App component into the root element.
+      ReactDOM.render(<App />, document.getElementById("root"));
+    </script>
   </body>
 </html>
