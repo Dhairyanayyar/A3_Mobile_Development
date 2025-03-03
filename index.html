@@ -156,6 +156,20 @@
       setPickedCard(null); // Clear selected cards after swap
     }
   };
+
+  const dealt5Cards = () => {
+    const newDeck = [...deck];
+    const cardsToDeal = newDeck.splice(0, 5);
+    setDeck(newDeck);
+    setDealtCards(cardsToDeal); // Set the dealt cards state
+  };
+
+  const dealt7Cards = () => {
+    const newDeck = [...deck];
+    const cardsToDeal = newDeck.splice(0, 7);
+    setDeck(newDeck);
+    setDealtCards(cardsToDeal);
+  };
       </script>
   </body>
 </html>
