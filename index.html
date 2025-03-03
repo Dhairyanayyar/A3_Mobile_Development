@@ -89,6 +89,36 @@
             </div>
           );
         }
+        function App() {
+    const suits = ["♥", "♦", "♣", "♠"];
+    const values = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
+
+    const [deck, setDeck] = React.useState(deckBuilder());
+    const [pickedCard, setPickedCard] = React.useState(null);
+    const [dealtCards, setDealtCards] = React.useState([]);
+
+    function deckBuilder() {
+      const newDeck = [];
+      for (let suit of suits) {
+        for (let value of values) {
+          newDeck.push({ suit, value });
+        }
+      }
+      return randomizeDeck(newDeck);
+    }
+
+    function randomizeDeck(deck) {
+      return deck.sort(() => Math.random() - 0.5);
+    }
+
+    return (
+      <div className="App">
+        <div className="deck" onClick={dealt5Cards}>
+          {deck.length === 0 ? <p>No cards remaining</p> : <p>Deck of Cards</p>}
+        </div>
+      </div>
+    );
+  }
       </script>
   </body>
 </html>
