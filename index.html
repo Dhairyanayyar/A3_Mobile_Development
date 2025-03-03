@@ -145,6 +145,17 @@
       </div>
     );
   }
+
+  const toggleCardHighlight = (index) => {
+    if (pickedCard === null) {
+      setPickedCard(index);
+    } else if (pickedCard === index) {
+      setPickedCard(null); // Deselect the card if clicked again
+    } else {
+      swapCards(pickedCard, index); // Swap the two selected cards
+      setPickedCard(null); // Clear selected cards after swap
+    }
+  };
       </script>
   </body>
 </html>
